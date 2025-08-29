@@ -1,0 +1,3351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="World class all-inclusive Mommy Makeover and cultural immersion in Ecuador. Meridian Aesthetics by Dávalos - Premium surgical care with curated recovery experiences from $8,900.">
+    <meta name="keywords" content="mommy makeover, ecuador, plastic surgery, meridian aesthetics, dávalos, JCI accredited, Hospital Metropolitano">
+    <title>Meridian Aesthetics by Dávalos | Mommy Makeover Ecuador | JCI-Accredited Care</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!--
+    *** Architecture Summary ***
+    CSS architecture: Custom properties/tokens, utility classes, BEM-like component naming
+    Key layout patterns: Grid-based layouts, flexbox navigation, modal overlays
+    JS selectors to preserve: [".btn-open-modal", ".modal-close", ".btn-surgeon-profile", "[data-surgeon]", ".faq-question", ".filter-btn", ".mobile-menu-btn", "#consultForm"]
+    Mobile risk areas: Navigation dropdown, hero grid, package cards, timeline, modals, fixed mobile CTA bar
+    -->
+    
+    <style>
+        :root {
+            --brand-400: #4DD4C0;
+            --brand-500: #2CC4B2;
+            --brand-600: #1BA89A;
+            --brand-700: #168F82;
+            --brand-800: #0F766E;
+            --accent-500: #10B981;
+            --ink-900: #111827;
+            --ink-700: #374151;
+            --ink-500: #6B7280;
+            --ink-300: #D1D5DB;
+            --line-200: #E5E7EB;
+            --bg-50: #F9FAFB;
+            --bg-0: #FFFFFF;
+            --success-500: #10B981;
+            --warning-500: #F59E0B;
+            --danger-500: #EF4444;
+            --whatsapp: #25D366;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 2px 12px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--ink-900);
+            background: var(--bg-0);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--bg-0);
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--brand-600);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        
+        .logo-main {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--ink-900);
+        }
+        
+        .logo-sub {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--ink-700);
+            margin-top: 2px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            color: var(--ink-700);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+        
+        .nav-link:hover {
+            color: var(--brand-600);
+        }
+        
+        .nav-dropdown {
+            position: relative;
+        }
+        
+        .nav-dropdown-toggle {
+            color: var(--ink-700);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            user-select: none;
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+        
+        .nav-dropdown-toggle:hover {
+            color: var(--brand-600);
+        }
+        
+        .nav-dropdown-toggle::after {
+            content: '▾';
+            font-size: 12px;
+        }
+        
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-0);
+            min-width: 260px;
+            margin-top: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .nav-dropdown-item {
+            display: block;
+            padding: 14px 20px;
+            color: var(--ink-700);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+            border-bottom: 1px solid var(--line-200);
+            line-height: 1.4;
+        }
+        
+        .nav-dropdown-item:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .nav-dropdown-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .nav-dropdown-item:hover {
+            background: var(--bg-50);
+            color: var(--brand-600);
+            padding-left: 24px;
+        }
+        
+        .nav-dropdown-item.separator-above {
+            border-top: 2px solid var(--line-200);
+            padding-top: 14px;
+            margin-top: 4px;
+        }
+        
+        .nav-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--ink-700);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 36px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            white-space: nowrap;
+            min-height: 52px;
+            font-family: inherit;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary {
+            background: var(--brand-700);
+            color: var(--bg-0);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: var(--brand-800);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-nav {
+            background: var(--brand-600);
+            color: var(--bg-0);
+            padding: 12px 28px;
+            border-radius: 12px;
+        }
+        
+        .btn-nav:hover:not(:disabled) {
+            background: var(--brand-700);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-0);
+            color: var(--brand-600);
+            border: 2px solid var(--brand-600);
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--brand-600);
+            color: var(--bg-0);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-whatsapp {
+            background: var(--whatsapp);
+            color: var(--bg-0);
+        }
+        
+        .btn-whatsapp:hover:not(:disabled) {
+            background: #1DA851;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #4DD4C0 0%, #2CC4B2 50%, #1BA89A 100%);
+            padding: 80px 0 100px;
+            color: var(--bg-0);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 500px;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: clamp(36px, 4.5vw, 52px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: clamp(18px, 2vw, 20px);
+            margin-bottom: 36px;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+        
+        .hero-image {
+            background: var(--bg-0);
+            border-radius: 24px;
+            padding: 40px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            color: var(--ink-500);
+            font-size: 14px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .trust-badges-hero {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .trust-badge-hero {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 999px;
+            font-size: 14px;
+            color: var(--bg-0);
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+        }
+        
+        .trust-badge-hero:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .trust-badge-hero .icon {
+            font-size: 16px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        
+        .section-header h2 {
+            font-size: clamp(32px, 4vw, 40px);
+            font-weight: 700;
+            color: var(--ink-900);
+            margin-bottom: 16px;
+        }
+        
+        .section-header p {
+            font-size: 18px;
+            color: var(--ink-700);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .packages {
+            background: var(--bg-50);
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .package-card {
+            background: var(--bg-0);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            border: 2px solid var(--line-200);
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .package-card.featured {
+            border-color: var(--brand-500);
+            transform: scale(1.05);
+        }
+        
+        .package-card.featured:hover {
+            transform: scale(1.05) translateY(-4px);
+        }
+        
+        .package-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brand-600);
+            color: var(--bg-0);
+            padding: 4px 20px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .package-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--ink-900);
+            margin-bottom: 8px;
+        }
+        
+        .package-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--brand-600);
+            margin-bottom: 24px;
+        }
+        
+        .package-price small {
+            font-size: 16px;
+            color: var(--ink-500);
+            font-weight: 400;
+        }
+        
+        .package-features {
+            list-style: none;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+        
+        .package-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--ink-700);
+        }
+        
+        .package-features li::before {
+            content: '✓';
+            color: var(--success-500);
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--line-200);
+            z-index: 0;
+        }
+        
+        .timeline-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-step {
+            text-align: center;
+        }
+        
+        .step-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-0);
+            border: 3px solid var(--brand-500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-weight: bold;
+            color: var(--brand-600);
+            transition: all 0.3s;
+        }
+        
+        .timeline-step:hover .step-icon {
+            background: var(--brand-500);
+            color: var(--bg-0);
+            transform: scale(1.1);
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: var(--ink-900);
+            margin-bottom: 8px;
+        }
+        
+        .step-desc {
+            font-size: 14px;
+            color: var(--ink-700);
+        }
+        
+        .surgeons {
+            background: var(--bg-50);
+        }
+        
+        .surgeons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        
+        .surgeon-card {
+            background: var(--bg-0);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+        }
+        
+        .surgeon-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .surgeon-photo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--brand-400), var(--brand-600));
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-0);
+            font-size: 48px;
+            font-weight: bold;
+            overflow: hidden;
+        }
+        
+        .surgeon-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .surgeon-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--ink-900);
+            margin-bottom: 8px;
+        }
+        
+        .surgeon-title {
+            color: var(--ink-700);
+            margin-bottom: 16px;
+        }
+        
+        .surgeon-credentials {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .credential {
+            padding: 4px 12px;
+            background: var(--bg-50);
+            border-radius: 999px;
+            font-size: 12px;
+            color: var(--ink-700);
+        }
+        
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--line-200);
+            border-radius: 999px;
+            background: var(--bg-0);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--brand-500);
+            background: var(--brand-500);
+            color: var(--bg-0);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        
+        .gallery-item {
+            background: var(--bg-0);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-500);
+            font-size: 14px;
+            position: relative;
+        }
+        
+        .gallery-image::before {
+            content: 'Before';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .gallery-image::after {
+            content: 'After';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .gallery-info {
+            padding: 16px;
+        }
+        
+        .gallery-title {
+            font-weight: 600;
+            color: var(--ink-900);
+            margin-bottom: 4px;
+        }
+        
+        .gallery-meta {
+            font-size: 14px;
+            color: var(--ink-500);
+        }
+        
+        .testimonials {
+            background: var(--bg-50);
+        }
+        
+        .testimonials-slider {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        
+        .testimonial-card {
+            background: var(--bg-0);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .testimonial-text {
+            font-size: 18px;
+            color: var(--ink-700);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: '"';
+            font-size: 48px;
+            color: var(--brand-500);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            opacity: 0.3;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .author-photo {
+            width: 48px;
+            height: 48px;
+            background: var(--brand-500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-0);
+        }
+        
+        .author-info {
+            flex: 1;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--ink-900);
+        }
+        
+        .author-meta {
+            font-size: 14px;
+            color: var(--ink-500);
+        }
+        
+        .stars {
+            color: #FFC107;
+            letter-spacing: 4px;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--bg-0);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .faq-question {
+            width: 100%;
+            padding: 24px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink-900);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+            font-family: inherit;
+        }
+        
+        .faq-question:hover {
+            background: var(--bg-50);
+        }
+        
+        .faq-icon {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 24px 24px;
+            color: var(--ink-700);
+            line-height: 1.6;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #2CC4B2, #1BA89A);
+            padding: 100px 20px;
+            text-align: center;
+            color: var(--bg-0);
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            margin: 0;
+        }
+        
+        .cta-section .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        .cta-section h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            margin: 0 0 20px 0;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            width: 100%;
+            line-height: 1.1;
+        }
+        
+        .cta-section p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            margin: 0 0 48px 0;
+            opacity: 0.95;
+            width: 100%;
+            line-height: 1.4;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        
+        .cta-section .btn {
+            min-width: 250px;
+            padding: 16px 40px;
+            font-size: 17px;
+        }
+        
+        .cta-section .btn-primary {
+            background: var(--bg-0);
+            color: var(--brand-700);
+            font-weight: 600;
+        }
+        
+        .cta-section .btn-primary:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-section .btn-whatsapp {
+            background: var(--whatsapp);
+            color: var(--bg-0);
+            font-weight: 600;
+        }
+        
+        .cta-section .btn-whatsapp:hover:not(:disabled) {
+            background: #1DA851;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer {
+            background: var(--ink-900);
+            color: var(--bg-0);
+            padding: 48px 0 24px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--bg-0);
+        }
+        
+        .footer-bottom {
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--bg-0);
+            border-radius: 24px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s;
+        }
+        
+        .modal-content.surgeon-profile {
+            max-width: 900px;
+        }
+        
+        .modal-header {
+            padding: 32px 32px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--line-200);
+            padding-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--ink-900);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 32px;
+            cursor: pointer;
+            color: var(--ink-500);
+            transition: color 0.2s;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .modal-close:hover {
+            color: var(--ink-900);
+        }
+        
+        .modal-body {
+            padding: 32px;
+        }
+        
+        .surgeon-profile-header {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+        
+        .surgeon-profile-image {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--brand-400), var(--brand-600));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-0);
+            font-size: 48px;
+            font-weight: bold;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        
+        .surgeon-profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .surgeon-profile-info h2 {
+            font-size: 32px;
+            color: var(--ink-900);
+            margin-bottom: 8px;
+        }
+        
+        .surgeon-profile-info .title {
+            font-size: 18px;
+            color: var(--brand-600);
+            margin-bottom: 16px;
+        }
+        
+        .surgeon-profile-info .credentials-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .profile-section {
+            margin-bottom: 32px;
+        }
+        
+        .profile-section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--ink-900);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--brand-500);
+        }
+        
+        .profile-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .profile-section ul li {
+            padding: 8px 0;
+            color: var(--ink-700);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .profile-section ul li::before {
+            content: '▸';
+            color: var(--brand-500);
+            margin-right: 12px;
+            font-weight: bold;
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+            padding: 20px;
+            background: var(--bg-50);
+            border-radius: 12px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--brand-600);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--ink-700);
+            margin-top: 4px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--ink-900);
+        }
+        
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--line-200);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--brand-500);
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-checkbox {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .form-checkbox input {
+            margin-top: 4px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        .mobile-cta {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .logo-main {
+                font-size: 18px;
+            }
+            
+            .logo-sub {
+                font-size: 11px;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-actions .btn-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 60px 0 80px;
+            }
+            
+            .hero-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+                line-height: 1.2;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+            }
+            
+            .hero-cta .btn {
+                width: 100%;
+            }
+            
+            .hero-image {
+                height: 300px;
+                border-radius: 16px;
+                padding: 24px;
+            }
+            
+            .trust-badges-hero {
+                gap: 8px;
+            }
+            
+            .trust-badge-hero {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .trust-badge-hero .icon {
+                font-size: 14px;
+            }
+            
+            .cta-section {
+                padding: 80px 20px;
+            }
+            
+            .cta-section h2 {
+                font-size: 32px;
+                line-height: 1.2;
+            }
+            
+            .cta-section p {
+                font-size: 18px;
+                margin-bottom: 36px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+            }
+            
+            .cta-section .btn {
+                width: 100%;
+                min-width: unset;
+                max-width: 350px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .package-card.featured {
+                transform: scale(1);
+            }
+            
+            .timeline-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                display: none;
+            }
+            
+            .surgeons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-slider {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .mobile-cta {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: var(--bg-0);
+                padding: 12px;
+                gap: 8px;
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+            }
+            
+            .mobile-cta .btn {
+                flex: 1;
+                padding: 12px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-wrapper {
+                grid-template-columns: 1fr 400px;
+                gap: 40px;
+            }
+            
+            .hero-image {
+                height: 350px;
+            }
+            
+            .packages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cta-section .btn {
+                min-width: 220px;
+            }
+        }
+    </style>
+
+    <!-- Mobile Overrides START -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style id="mobile-overrides">
+      /* Enhanced mobile responsiveness */
+      @media (max-width: 768px) {
+        /* Improved navigation dropdown for mobile */
+        .nav-dropdown-menu {
+          position: static;
+          opacity: 1;
+          visibility: visible;
+          transform: none;
+          margin-top: 8px;
+          max-width: 100%;
+          box-shadow: none;
+          border: 1px solid var(--line-200);
+        }
+        
+        .nav-dropdown:hover .nav-dropdown-menu {
+          transform: none;
+        }
+        
+        .nav-dropdown-toggle {
+          width: 100%;
+          justify-content: space-between;
+          padding: 8px 0;
+        }
+        
+        /* Better button sizing for mobile */
+        .btn {
+          min-height: 48px;
+          padding: 12px 24px;
+        }
+        
+        /* Modal improvements for mobile */
+        .modal-content {
+          width: 95%;
+          max-height: 95vh;
+          border-radius: 16px;
+        }
+        
+        .modal-header {
+          padding: 24px 24px 0;
+        }
+        
+        .modal-body {
+          padding: 24px;
+        }
+        
+        .modal-title {
+          font-size: 24px;
+        }
+        
+        .surgeon-profile-header {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        
+        .surgeon-profile-info h2 {
+          font-size: 26px;
+        }
+        
+        /* Form input improvements for iOS */
+        .form-input,
+        .form-select,
+        .form-textarea {
+          font-size: 16px; /* Prevents zoom on iOS */
+          -webkit-appearance: none;
+          appearance: none;
+        }
+        
+        /* Improved package cards */
+        .package-card {
+          padding: 24px;
+        }
+        
+        .package-features li {
+          font-size: 15px;
+        }
+        
+        /* Better section spacing */
+        .section-header {
+          margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+          font-size: 28px;
+        }
+        
+        .section-header p {
+          font-size: 16px;
+        }
+        
+        /* Safe area padding for iPhone X+ */
+        .mobile-cta {
+          padding-bottom: max(12px, env(safe-area-inset-bottom));
+        }
+        
+        body {
+          padding-bottom: 80px; /* Account for fixed mobile CTA */
+        }
+        
+        /* Improved FAQ for mobile */
+        .faq-question {
+          padding: 20px;
+          font-size: 16px;
+        }
+        
+        /* Gallery enhancements */
+        .gallery-filters {
+          gap: 8px;
+          padding: 0 8px;
+        }
+        
+        .filter-btn {
+          padding: 8px 16px;
+          font-size: 13px;
+        }
+        
+        /* Timeline improvements */
+        .timeline-step {
+          margin-bottom: 24px;
+        }
+        
+        /* Trust badges wrapping */
+        .trust-badges-hero {
+          justify-content: center;
+        }
+      }
+      
+      @media (max-width: 430px) {
+        /* Optimizations for smaller screens */
+        .container {
+          padding: 0 16px;
+        }
+        
+        nav {
+          padding: 16px 0;
+        }
+        
+        .hero h1 {
+          font-size: 28px;
+        }
+        
+        .hero p {
+          font-size: 16px;
+        }
+        
+        .package-name {
+          font-size: 20px;
+        }
+        
+        .package-price {
+          font-size: 28px;
+        }
+        
+        .trust-badge-hero {
+          flex: 0 0 calc(50% - 4px);
+        }
+        
+        .cta-section h2 {
+          font-size: 28px;
+        }
+        
+        .cta-section p {
+          font-size: 16px;
+        }
+        
+        .modal-content {
+          border-radius: 12px 12px 0 0;
+          width: 100%;
+          max-height: 100vh;
+        }
+      }
+      
+      @media (max-width: 390px) {
+        /* Ultra-small device optimizations */
+        .logo-main {
+          font-size: 16px;
+        }
+        
+        .hero h1 {
+          font-size: 26px;
+        }
+        
+        .btn {
+          font-size: 14px;
+          padding: 10px 20px;
+        }
+        
+        .trust-badge-hero {
+          padding: 4px 8px;
+          font-size: 11px;
+        }
+        
+        .trust-badge-hero .icon {
+          font-size: 12px;
+        }
+        
+        .package-features li {
+          font-size: 14px;
+        }
+      }
+      
+      /* Landscape mode adjustments */
+      @media (max-height: 500px) and (orientation: landscape) {
+        .hero {
+          padding: 40px 0 60px;
+        }
+        
+        section {
+          padding: 40px 0;
+        }
+        
+        .hero-image {
+          height: 200px;
+        }
+        
+        .modal-content {
+          max-height: 85vh;
+        }
+      }
+      
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        .btn:focus,
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus,
+        .filter-btn:focus,
+        .faq-question:focus {
+          outline: 3px solid currentColor;
+          outline-offset: 2px;
+        }
+      }
+      
+      /* Reduced motion support */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      
+      /* Touch target improvements */
+      @media (hover: none) and (pointer: coarse) {
+        .nav-link,
+        .nav-dropdown-toggle,
+        .btn,
+        .filter-btn,
+        .faq-question,
+        .form-checkbox input[type="checkbox"] {
+          min-height: 44px;
+          min-width: 44px;
+        }
+        
+        .form-checkbox input[type="checkbox"] {
+          width: 20px;
+          height: 20px;
+        }
+      }
+      
+      /* Focus visible improvements */
+      .btn:focus-visible,
+      .nav-link:focus-visible,
+      .filter-btn:focus-visible,
+      .faq-question:focus-visible {
+        outline: 2px solid var(--brand-600);
+        outline-offset: 2px;
+      }
+    </style>
+    <!-- Mobile Overrides END -->
+
+    <!-- Mobile Horizontal Scroll Overrides START -->
+    <style id="mobile-horizontal-scroll-overrides">
+      /* Utility: horizontal scroll container */
+      @media (max-width: 768px) {
+        /* Generic patterns */
+        .h-scroll {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
+          scroll-snap-type: x mandatory;
+          padding-bottom: 8px; /* room for scrollbar on some browsers */
+          gap: 16px;
+        }
+        .h-scroll > * { scroll-snap-align: start; }
+
+        /* Wrapper for scrollable sections with arrows */
+        .scroll-wrapper {
+          position: relative;
+        }
+
+        /* Navigation arrows */
+        .scroll-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 40px;
+          height: 40px;
+          background: rgba(255, 255, 255, 0.95);
+          border: 1px solid var(--line-200);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          z-index: 10;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          transition: all 0.2s;
+          font-size: 18px;
+          color: var(--ink-700);
+        }
+
+        .scroll-arrow:hover {
+          background: var(--bg-0);
+          transform: translateY(-50%) scale(1.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .scroll-arrow.prev {
+          left: 10px;
+        }
+
+        .scroll-arrow.next {
+          right: 10px;
+        }
+
+        .scroll-arrow.disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
+        }
+
+        .scroll-arrow.disabled:hover {
+          transform: translateY(-50%);
+        }
+
+        /* 1) Packages → horizontally scrollable cards */
+        .packages-grid {
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: 85%;
+          grid-template-columns: none !important;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding: 20px 7.5% 0 7.5%;
+          gap: 20px;
+          overflow-y: visible !important;
+        }
+        .packages-grid::-webkit-scrollbar {
+          display: none;
+        }
+        .packages-grid > .package-card { 
+          scroll-snap-align: center;
+          scroll-snap-stop: always;
+          padding: 24px !important;
+          max-height: calc(100vh - 180px);
+          margin-top: 14px !important;
+        }
+        .packages-grid::before,
+        .packages-grid::after {
+          content: '';
+          width: 7.5%;
+        }
+        
+        /* Wrapper needs to allow overflow for badge */
+        .scroll-wrapper {
+          overflow: visible !important;
+        }
+        
+        /* Compact package card styles for mobile */
+        .package-card .package-name {
+          font-size: 22px !important;
+          margin-bottom: 8px !important;
+        }
+        
+        .package-card .package-price {
+          font-size: 32px !important;
+          margin-bottom: 20px !important;
+        }
+        
+        .package-card .package-price small {
+          font-size: 14px !important;
+          color: var(--ink-500) !important;
+        }
+        
+        .package-card .package-features {
+          margin-bottom: 24px !important;
+          padding: 0 !important;
+          list-style: none !important;
+        }
+        
+        .package-card .package-features li {
+          padding: 7px 0 !important;
+          font-size: 14px !important;
+          line-height: 1.5 !important;
+          display: flex !important;
+          align-items: flex-start !important;
+          gap: 10px !important;
+        }
+        
+        .package-card .package-features li::before {
+          content: '✓' !important;
+          color: var(--success-500) !important;
+          font-weight: bold !important;
+          font-size: 16px !important;
+          line-height: 1.2 !important;
+          flex-shrink: 0 !important;
+          margin-top: -1px !important;
+        }
+        
+        /* Hide last few items on packages to fit on screen */
+        .package-card.featured .package-features li:nth-last-child(1),
+        .package-card.featured .package-features li:nth-last-child(2) {
+          display: none !important;
+        }
+        
+        .package-card:last-child .package-features li:nth-last-child(1),
+        .package-card:last-child .package-features li:nth-last-child(2),
+        .package-card:last-child .package-features li:nth-last-child(3) {
+          display: none !important;
+        }
+        
+        .package-card .btn {
+          padding: 12px 28px !important;
+          font-size: 15px !important;
+          min-height: 46px !important;
+          width: 100% !important;
+        }
+        
+        .package-badge {
+          top: -14px !important;
+          padding: 4px 18px !important;
+          font-size: 11px !important;
+          z-index: 10 !important;
+        }
+
+        /* 2) Timeline steps → horizontal */
+        .timeline-steps {
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: 80%;
+          grid-template-columns: none !important;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding: 0 10%;
+          gap: 20px;
+        }
+        .timeline-steps::-webkit-scrollbar {
+          display: none;
+        }
+        .timeline::before { display: none !important; }
+        .timeline-step { 
+          scroll-snap-align: center;
+          scroll-snap-stop: always;
+        }
+        .timeline-steps::before,
+        .timeline-steps::after {
+          content: '';
+          width: 10%;
+        }
+
+        /* 3) Surgeons → horizontal cards */
+        .surgeons-grid {
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: 80%;
+          grid-template-columns: none !important;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding: 0 10%;
+          gap: 20px;
+        }
+        .surgeons-grid::-webkit-scrollbar {
+          display: none;
+        }
+        .surgeons-grid > .surgeon-card { 
+          scroll-snap-align: center;
+          scroll-snap-stop: always;
+        }
+        .surgeons-grid::before,
+        .surgeons-grid::after {
+          content: '';
+          width: 10%;
+        }
+
+        /* 4) Gallery → horizontal tiles */
+        .gallery-grid {
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: 75%;
+          grid-template-columns: none !important;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding: 0 12.5%;
+          gap: 20px;
+        }
+        .gallery-grid::-webkit-scrollbar {
+          display: none;
+        }
+        .gallery-grid > .gallery-item { 
+          scroll-snap-align: center;
+          scroll-snap-stop: always;
+        }
+        .gallery-grid::before,
+        .gallery-grid::after {
+          content: '';
+          width: 12.5%;
+        }
+
+        /* 5) Testimonials → horizontal cards */
+        .testimonials-slider {
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: 85%;
+          grid-template-columns: none !important;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding: 0 7.5%;
+          gap: 20px;
+        }
+        .testimonials-slider::-webkit-scrollbar {
+          display: none;
+        }
+        .testimonials-slider > .testimonial-card { 
+          scroll-snap-align: center;
+          scroll-snap-stop: always;
+        }
+        .testimonials-slider::before,
+        .testimonials-slider::after {
+          content: '';
+          width: 7.5%;
+        }
+
+        /* Images/media: never overflow */
+        img, video { max-width: 100%; height: auto; }
+      }
+    </style>
+    <!-- Mobile Horizontal Scroll Overrides END -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Main navigation">
+                <a href="#" class="logo" aria-label="Meridian Aesthetics by Dávalos Home">
+                    <div class="logo-text">
+                        <span class="logo-main">Meridian Aesthetics</span>
+                        <span class="logo-sub">by Dávalos</span>
+                    </div>
+                </a>
+                <div class="nav-menu">
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
+                    <a href="#packages" class="nav-link">Packages</a>
+                    <div class="nav-dropdown">
+                        <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Surgeons</button>
+                        <div class="nav-dropdown-menu" role="menu">
+                            <a href="#" class="nav-dropdown-item" role="menuitem" data-surgeon="pablo">
+                                <strong>👨‍⚕️ Dr. Pablo Dávalos</strong><br>
+                                <span style="font-size: 12px; opacity: 0.8;">Founder & Lead Surgeon • 40+ Years</span>
+                            </a>
+                            <a href="#" class="nav-dropdown-item" role="menuitem" data-surgeon="pablo-a">
+                                <strong>👨‍⚕️ Dr. Pablo A. Dávalos</strong><br>
+                                <span style="font-size: 12px; opacity: 0.8;">Plastic & Reconstructive • Miami Fellowship</span>
+                            </a>
+                            <a href="#" class="nav-dropdown-item" role="menuitem" data-surgeon="andres">
+                                <strong>👨‍⚕️ Dr. Andrés Dávalos</strong><br>
+                                <span style="font-size: 12px; opacity: 0.8;">Reconstructive Surgeon • Colombian Training</span>
+                            </a>
+                            <a href="#surgeons" class="nav-dropdown-item separator-above" role="menuitem">View All Surgeons →</a>
+                        </div>
+                    </div>
+                    <a href="#gallery" class="nav-link">Gallery</a>
+                    <a href="#testimonials" class="nav-link">Testimonials</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="btn btn-nav btn-open-modal">Schedule Video Consult</button>
+                    <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-wrapper">
+                <div class="hero-content">
+                    <h1>World Class All-Inclusive Mommy Makeover and Cultural Immersion</h1>
+                    <p>Experience Ecuador's beauty while transforming yours — premium surgical care with curated recovery experiences.</p>
+                    <div class="hero-cta">
+                        <button class="btn btn-primary btn-open-modal">Schedule Video Consult</button>
+                        <a href="https://wa.me/593999999999" class="btn btn-whatsapp">Message on WhatsApp</a>
+                    </div>
+                    <div class="trust-badges-hero">
+                        <a href="https://hospitalmetropolitano.org" class="trust-badge-hero" target="_blank" rel="noopener">
+                            <span class="icon">⭐</span>
+                            <span>JCI Accredited Hospital</span>
+                        </a>
+                        <a href="#" class="trust-badge-hero">
+                            <span class="icon">🏆</span>
+                            <span>40+ Years Experience</span>
+                        </a>
+                        <a href="#" class="trust-badge-hero">
+                            <span class="icon">🔬</span>
+                            <span>SECPRE/FILACP Certified</span>
+                        </a>
+                        <a href="#" class="trust-badge-hero">
+                            <span class="icon">🛡️</span>
+                            <span>Full Insurance Coverage</span>
+                        </a>
+                        <a href="#" class="trust-badge-hero">
+                            <span class="icon">🌎</span>
+                            <span>Cultural Concierge</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div>
+                        <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink-300); margin-bottom: 20px;" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <p>Hero Image – Medical Facility / Recovery</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="packages" class="packages">
+        <div class="container">
+            <div class="section-header">
+                <h2>All-Inclusive Packages</h2>
+                <p>Transparent pricing with everything included for your peace of mind</p>
+            </div>
+            
+            <div class="packages-grid">
+                <div class="package-card">
+                    <h3 class="package-name">Essential</h3>
+                    <div class="package-price">
+                        <small>From</small> $8,900
+                    </div>
+                    <ul class="package-features">
+                        <li>Surgeon + Anesthesia Fees</li>
+                        <li>JCI-Accredited Hospital Facility</li>
+                        <li>Compression Garments</li>
+                        <li>Medications</li>
+                        <li>Private Airport Transfers</li>
+                        <li>5 Nights Recovery House</li>
+                        <li>Daily Nurse Check-ins</li>
+                        <li>30-Day Virtual Follow-up</li>
+                    </ul>
+                    <button class="btn btn-secondary btn-open-modal">Learn More</button>
+                </div>
+                
+                <div class="package-card featured">
+                    <span class="package-badge">Most Popular</span>
+                    <h3 class="package-name">Premium</h3>
+                    <div class="package-price">
+                        <small>From</small> $10,900
+                    </div>
+                    <ul class="package-features">
+                        <li>Everything in Essential</li>
+                        <li>7 Nights Recovery House</li>
+                        <li>3 Lymphatic Massages</li>
+                        <li>24/7 Nurse Access</li>
+                        <li>Concierge Support</li>
+                        <li>Guest Accommodation</li>
+                        <li>Guided Historic Quito Tour</li>
+                        <li>Spa Day at Termas de Papallacta</li>
+                        <li>Private Chef Ecuadorian Cuisine</li>
+                        <li>60-Day Virtual Follow-up</li>
+                        <li>Complication Insurance</li>
+                    </ul>
+                    <button class="btn btn-primary btn-open-modal">Schedule Consult</button>
+                </div>
+                
+                <div class="package-card">
+                    <h3 class="package-name">VIP</h3>
+                    <div class="package-price">
+                        <small>From</small> $13,900
+                    </div>
+                    <ul class="package-features">
+                        <li>Everything in Premium</li>
+                        <li>Private Suite Recovery</li>
+                        <li>7 Lymphatic Massages</li>
+                        <li>Personal Nurse 24/7</li>
+                        <li>Premium Vehicle Transfers</li>
+                        <li>Guest Suite Included</li>
+                        <li>Helicopter Tour of Cotopaxi Volcano</li>
+                        <li>Private Art Gallery Tours</li>
+                        <li>Exclusive Equator Monument Visit</li>
+                        <li>90-Day Virtual Follow-up</li>
+                        <li>Extended Insurance Coverage</li>
+                    </ul>
+                    <button class="btn btn-secondary btn-open-modal">Learn More</button>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 32px; color: var(--ink-500); font-size: 14px;">
+                * BMI > 30 and revisional surgeries may affect pricing. All packages include bilingual support.
+            </p>
+        </div>
+    </section>
+    
+    <section id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your Journey to Transformation</h2>
+                <p>A seamless 5-step process with support at every stage</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-steps">
+                    <div class="timeline-step">
+                        <div class="step-icon">1</div>
+                        <div class="step-title">Tele-Preop</div>
+                        <div class="step-desc">Video consultation to assess candidacy and plan</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon">2</div>
+                        <div class="step-title">Arrival & Culture</div>
+                        <div class="step-desc">Explore Quito's heritage before your procedure</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon">3</div>
+                        <div class="step-title">Surgery</div>
+                        <div class="step-desc">Procedure at JCI-accredited Hospital Metropolitano</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon">4</div>
+                        <div class="step-title">Recovery</div>
+                        <div class="step-desc">Nurse-monitored healing in luxury recovery suite</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon">5</div>
+                        <div class="step-title">Follow-up</div>
+                        <div class="step-desc">30/60/90-day virtual check-ins with surgeon</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="surgeons" class="surgeons">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Your Surgeons</h2>
+                <p>Board-certified experts with Hospital Metropolitano privileges</p>
+            </div>
+            
+            <div class="surgeons-grid">
+                <div class="surgeon-card">
+                    <div class="surgeon-photo">
+                        <img src="images/surgeons/dr-pablo-davalos.jpg" alt="Dr. Pablo Dávalos" width="120" height="120" loading="lazy">
+                    </div>
+                    <h3 class="surgeon-name">Dr. Pablo Dávalos</h3>
+                    <p class="surgeon-title">Founder & Lead Surgeon</p>
+                    <div class="surgeon-credentials">
+                        <span class="credential">40+ Years</span>
+                        <span class="credential">SECPRE</span>
+                        <span class="credential">FILACP</span>
+                        <span class="credential">Ivo Pitanguy</span>
+                    </div>
+                    <button class="btn btn-secondary btn-surgeon-profile" data-surgeon="pablo">View Full Profile</button>
+                </div>
+                
+                <div class="surgeon-card">
+                    <div class="surgeon-photo">
+                        <img src="images/surgeons/dr-pablo-a-davalos.jpg" alt="Dr. Pablo A. Dávalos" width="120" height="120" loading="lazy">
+                    </div>
+                    <h3 class="surgeon-name">Dr. Pablo A. Dávalos</h3>
+                    <p class="surgeon-title">Plastic & Reconstructive</p>
+                    <div class="surgeon-credentials">
+                        <span class="credential">Miami Fellowship</span>
+                        <span class="credential">SECPRE</span>
+                        <span class="credential">Post-Bariatric</span>
+                    </div>
+                    <button class="btn btn-secondary btn-surgeon-profile" data-surgeon="pablo-a">View Full Profile</button>
+                </div>
+                
+                <div class="surgeon-card">
+                    <div class="surgeon-photo">
+                        <img src="images/surgeons/dr-andres-davalos.jpg" alt="Dr. Andrés Dávalos" width="120" height="120" loading="lazy">
+                    </div>
+                    <h3 class="surgeon-name">Dr. Andrés Dávalos</h3>
+                    <p class="surgeon-title">Plastic Surgeon</p>
+                    <div class="surgeon-credentials">
+                        <span class="credential">Colombian Training</span>
+                        <span class="credential">Hand Surgery</span>
+                        <span class="credential">ISAPS</span>
+                    </div>
+                    <button class="btn btn-secondary btn-surgeon-profile" data-surgeon="andres">View Full Profile</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>Before & After Gallery</h2>
+                <p>Real patient results with verified consent</p>
+            </div>
+            
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="tummy">Tummy Tuck</button>
+                <button class="filter-btn" data-filter="breast">Breast Surgery</button>
+                <button class="filter-btn" data-filter="lipo">Liposuction</button>
+                <button class="filter-btn" data-filter="full">Full Makeover</button>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="full">
+                    <div class="gallery-image">Patient Result</div>
+                    <div class="gallery-info">
+                        <div class="gallery-title">Full Mommy Makeover</div>
+                        <div class="gallery-meta">6 months post-surgery • Consent verified</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="tummy">
+                    <div class="gallery-image">Patient Result</div>
+                    <div class="gallery-info">
+                        <div class="gallery-title">Tummy Tuck + Lipo</div>
+                        <div class="gallery-meta">3 months post-surgery • Consent verified</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="breast">
+                    <div class="gallery-image">Patient Result</div>
+                    <div class="gallery-info">
+                        <div class="gallery-title">Breast Lift + Augmentation</div>
+                        <div class="gallery-meta">12 months post-surgery • Consent verified</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="lipo">
+                    <div class="gallery-image">Patient Result</div>
+                    <div class="gallery-info">
+                        <div class="gallery-title">360° Liposuction</div>
+                        <div class="gallery-meta">4 months post-surgery • Consent verified</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="full">
+                    <div class="gallery-image">Patient Result</div>
+                    <div class="gallery-info">
+                        <div class="gallery-title">Complete Transformation</div>
+                        <div class="gallery-meta">9 months post-surgery • Consent verified</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="tummy">
+                    <div class="gallery-image">Patient Result</div>
+                    <div class="gallery-info">
+                        <div class="gallery-title">Extended Tummy Tuck</div>
+                        <div class="gallery-meta">6 months post-surgery • Consent verified</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Patient Stories</h2>
+                <p>Real experiences from our transformed patients</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        The entire experience exceeded my expectations. From the first video consultation to my final follow-up, the team was incredibly professional and caring. The JCI-accredited hospital gave me complete peace of mind.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-photo">SM</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah M.</div>
+                            <div class="author-meta">California, USA • Full Makeover</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        The recovery house was beautiful and the nursing care was exceptional. Having a bilingual concierge made everything so easy. I felt safe and supported throughout my entire journey.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-photo">JT</div>
+                        <div class="author-info">
+                            <div class="author-name">Jennifer T.</div>
+                            <div class="author-meta">Texas, USA • Tummy Tuck + Lipo</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        Dr. Dávalos and his team are true artists. The results are natural and exactly what I wanted. The virtual follow-ups made it convenient to stay connected with my surgeon after returning home.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-photo">MR</div>
+                        <div class="author-info">
+                            <div class="author-name">Maria R.</div>
+                            <div class="author-meta">Florida, USA • Breast Surgery</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about your journey</p>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is Hospital Metropolitano really JCI-accredited?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! Hospital Metropolitano is the only JCI-accredited hospital in Ecuador. JCI (Joint Commission International) is the gold standard for healthcare quality and patient safety worldwide. You can verify this accreditation directly on their website.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How long do I need to stay in Ecuador?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Most patients stay 10-14 days. This includes 1-2 days pre-surgery for final evaluations, the surgery day, and 7-10 days of recovery before flying home. Your surgeon will provide specific recommendations based on your procedures.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I bring a companion?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely! We encourage patients to bring a companion. Our Premium and VIP packages include guest accommodation. Your companion can stay with you at the recovery house and provide additional support during your healing.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What about scarring?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Our surgeons use advanced techniques to minimize scarring. Incisions are strategically placed in natural body contours. We provide scar management protocols including silicone sheets and creams. Most scars fade significantly within 6-12 months.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is complication insurance included?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Complication insurance is included in our Premium and VIP packages. This covers any unexpected medical costs related to your surgery for up to 30 days post-procedure. Essential package patients can add this coverage for an additional fee.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>When can I resume normal activities?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Light activities can typically resume after 2 weeks. Most patients return to work (desk jobs) after 2-3 weeks. Exercise and heavy lifting should wait 6-8 weeks. Your surgeon will provide a personalized recovery timeline based on your specific procedures.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start Your Transformation?</h2>
+            <p>Schedule your free video consultation today</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-open-modal">Schedule Video Consult</button>
+                <a href="https://wa.me/593999999999" class="btn btn-whatsapp">Message on WhatsApp</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Meridian Aesthetics by Dávalos</h3>
+                    <p style="color: rgba(255,255,255,0.7); margin-top: 12px;">
+                        Excellence in plastic surgery with over 40 years of combined experience. JCI-accredited care at Hospital Metropolitano.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#surgeons">Our Surgeons</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://hospitalmetropolitano.org" target="_blank" rel="noopener">Hospital Metropolitano</a></li>
+                        <li><a href="#">Patient Forms</a></li>
+                        <li><a href="#">Recovery Guide</a></li>
+                        <li><a href="#">Travel Information</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li>📞 +593 99 999 9999</li>
+                        <li>📧 info@davaloscirugia.com</li>
+                        <li>📍 Quito, Ecuador</li>
+                        <li><a href="https://wa.me/593999999999">💬 WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 Meridian Aesthetics by Dávalos. All rights reserved. | 
+                    <a href="#" style="color: rgba(255,255,255,0.5);">Privacy Policy</a> | 
+                    <a href="#" style="color: rgba(255,255,255,0.5);">Terms of Service</a> | 
+                    <a href="#" style="color: rgba(255,255,255,0.5);">Medical Disclaimer</a>
+                </p>
+                <p style="margin-top: 8px;">
+                    Cosmetic outcomes vary. This site does not provide medical advice; individual evaluation required.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="mobile-cta">
+        <button class="btn btn-primary btn-open-modal">Schedule</button>
+        <a href="https://wa.me/593999999999" class="btn btn-whatsapp">WhatsApp</a>
+    </div>
+    
+    <div id="consultModal" class="modal" role="dialog" aria-labelledby="consult-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="consult-modal-title">Schedule Your Consultation</h2>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="consultForm">
+                    <div class="form-group">
+                        <label class="form-label" for="fullname">Full Name *</label>
+                        <input type="text" id="fullname" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email *</label>
+                        <input type="email" id="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="contact-method">Preferred Contact Method</label>
+                        <select id="contact-method" class="form-select">
+                            <option>Video Call</option>
+                            <option>WhatsApp</option>
+                            <option>Email</option>
+                            <option>Phone Call</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="procedures">Procedures of Interest</label>
+                        <select id="procedures" class="form-select">
+                            <option>Full Mommy Makeover</option>
+                            <option>Tummy Tuck</option>
+                            <option>Breast Surgery</option>
+                            <option>Liposuction</option>
+                            <option>Multiple Procedures</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="timeline">Preferred Timeline</label>
+                        <select id="timeline" class="form-select">
+                            <option>As soon as possible</option>
+                            <option>Within 3 months</option>
+                            <option>3-6 months</option>
+                            <option>6+ months</option>
+                            <option>Just researching</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="message">Additional Information</label>
+                        <textarea id="message" class="form-textarea" placeholder="Tell us about your goals or any questions you have..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="consent" required>
+                            <label for="consent" style="font-size: 14px; color: var(--ink-700);">
+                                I consent to be contacted regarding my inquiry and understand this is not medical advice. Individual evaluation required.
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div id="surgeonModal" class="modal" role="dialog" aria-labelledby="surgeon-modal-title" aria-hidden="true">
+        <div class="modal-content surgeon-profile">
+            <div class="modal-header">
+                <h2 class="modal-title" id="surgeon-modal-title">Surgeon Profile</h2>
+                <button class="modal-close btn-close-surgeon" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body" id="surgeon-modal-body">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        window.App = (function() {
+            'use strict';
+            
+            const surgeonProfiles = {
+                'pablo': {
+                    name: 'Dr. Pablo Dávalos',
+                    initials: 'PD',
+                    title: 'Founder & Lead Plastic Surgeon',
+                    credentials: ['Board Certified Plastic Surgeon', 'SECPRE President 1997-1999', 'FILACP Secretary 1998-2006', '40+ Years Experience'],
+                    stats: [
+                        { number: '40+', label: 'Years Experience' },
+                        { number: '20,000+', label: 'Procedures Performed' },
+                        { number: '25+', label: 'Published Papers' },
+                        { number: '5', label: 'Medical Books Author' }
+                    ],
+                    education: [
+                        'Medical Degree - Universidad Central del Ecuador, 1981',
+                        'Plastic Surgery Residency - Clínica Ivo Pitanguy, Rio de Janeiro, Brazil (1985-1987)',
+                        'Advanced Training with Professor Ivo Pitanguy - World-renowned plastic surgeon',
+                        'General Surgery Training - Hospital Carlos Andrade Marín, Quito (1982-1985)',
+                        'Member of International Society of Aesthetic Plastic Surgery (IPRAS) since 1988'
+                    ],
+                    specializations: [
+                        'Pioneer in Mommy Makeover Procedures in Ecuador',
+                        'Complex Breast Surgery (Reduction, Augmentation, Reconstruction)',
+                        'Advanced Rhinoplasty Techniques',
+                        'Body Contouring and Abdominoplasty',
+                        'Pediatric Plastic Surgery and Cleft Lip/Palate',
+                        'Burn Treatment and Reconstruction',
+                        'Facial Rejuvenation Surgery'
+                    ],
+                    hospital: [
+                        'Director - Instituto de Cirugía Plástica y Clínicas Quirúrgicas (Since 1990)',
+                        'Former Chief of Plastic Surgery - Hospital Pediátrico Baca Ortiz (2000-2009)',
+                        'Founder - Hospital del Día "Niños de la Mano de María" (2000)',
+                        'Professor of Plastic Surgery - Universidad Internacional del Ecuador (2005-2011)',
+                        'Private Practice at Hospital Metropolitano - JCI Accredited'
+                    ],
+                    achievements: [
+                        'National President of SECPRE (1997-1999) - Led national plastic surgery society',
+                        'FILACP Regional Coordinator for Bolivarian Countries (1998-2002)',
+                        'Author of "Quemaduras: Tratamiento Integral" - Comprehensive burn treatment textbook',
+                        'Over 100 presentations at international plastic surgery conferences',
+                        'Creator of humanitarian project for children with cleft lip/palate',
+                        'Published in Cirugía Plástica Ibero-Latinoamericana journal',
+                        'Recognized for 25+ years of medical excellence by Colegio Médico de Pichincha'
+                    ]
+                },
+                'pablo-a': {
+                    name: 'Dr. Pablo A. Dávalos',
+                    initials: 'PA',
+                    title: 'Plastic & Reconstructive Surgeon',
+                    credentials: ['Board Certified Plastic Surgeon', 'Miami Fellowship', 'Post-Bariatric Specialist', '7+ Years Experience'],
+                    stats: [
+                        { number: '7+', label: 'Years Experience' },
+                        { number: '3,000+', label: 'Procedures Performed' },
+                        { number: '15+', label: 'Published Papers' },
+                        { number: '2', label: 'Book Chapters' }
+                    ],
+                    education: [
+                        'Medical Degree - Universidad Internacional del Ecuador, 2009',
+                        'Plastic Surgery Residency - Universidad Central de Venezuela, Caracas (2013-2015)',
+                        'Fellowship in Aesthetic Plastic Surgery - Miami Plastic Surgery, USA (2015)',
+                        'General Surgery Training - Multiple hospitals in Ecuador (2009-2013)',
+                        'Hospital Carlos Arvelo Military Hospital Training, Venezuela'
+                    ],
+                    specializations: [
+                        'Body Contouring After Massive Weight Loss',
+                        'Post-Bariatric Surgery Coordinator at IESS',
+                        'Breast Reconstruction Post-Mastectomy',
+                        'Advanced Breast Augmentation Techniques',
+                        'Oncoplastic Breast Surgery',
+                        'Complex Abdominoplasty Procedures',
+                        'Gynecomastia Treatment'
+                    ],
+                    hospital: [
+                        'Specialist - Hospital Carlos Andrade Marín IESS (Since 2017)',
+                        'Coordinator of Post-Bariatric Surgery Department - IESS',
+                        'Former Surgeon - SOLCA Cancer Hospital (2017-2020)',
+                        'Professor - Universidad Central Oncology Program (2017-2020)',
+                        'Private Practice - Hospital Metropolitano, Hospital Axxis, Hospital de los Valles'
+                    ],
+                    achievements: [
+                        'Published in Cirugía Plástica Ibero-Latinoamericana (IPRAS) journal',
+                        'Chapter author in "Cirugía Plástica del Contorno Corporal" textbook',
+                        'Chapter author in "Cirugía Plástica de la Mama" textbook',
+                        'International speaker at IPRAS World Congress (Chile, 2013)',
+                        'Active member of SECPRE and FILACP',
+                        'Specialized in complex post-cancer reconstructive surgery',
+                        'Award for excellence in surgical technique presentations'
+                    ]
+                },
+                'andres': {
+                    name: 'Dr. Andrés Dávalos',
+                    initials: 'AD',
+                    title: 'Reconstructive & Aesthetic Surgeon',
+                    credentials: ['Board Certified Plastic Surgeon', 'Colombian Training', 'Hand Surgery', '6+ Years Experience'],
+                    stats: [
+                        { number: '6+', label: 'Years Experience' },
+                        { number: '1,500+', label: 'Procedures Performed' },
+                        { number: '10+', label: 'Published Papers' },
+                        { number: '15+', label: 'Conference Presentations' }
+                    ],
+                    education: [
+                        'Medical Degree - Universidad de las Américas (UDLA), 2016',
+                        'Plastic Surgery Specialization - Universidad Simón Bolívar, Colombia (2018-2022)',
+                        'Second Best Graduate - Medical School Class of 2016',
+                        'Internship - Hospital San Francisco IESS, Quito',
+                        'Multiple hospital rotations including Eugenio Espejo and Carlos Andrade Marín'
+                    ],
+                    specializations: [
+                        'Cleft Lip and Palate Reconstruction',
+                        'Hand Surgery and Tendon Reconstruction',
+                        'Nasal Reconstruction and Rhinoplasty',
+                        'Microsurgery Techniques',
+                        'Breast Surgery and Augmentation',
+                        'Body Contouring Procedures',
+                        'Facial Aesthetic Surgery'
+                    ],
+                    hospital: [
+                        'Private Practice - Hospital Metropolitano (Since 2022)',
+                        'Private Practice - Hospital Axxis',
+                        'Private Practice - Clínica Pasteur',
+                        'Former Resident - Centro de Cirugía Estética Dávalos (2017-2018)',
+                        'ISAPS International Member'
+                    ],
+                    achievements: [
+                        'Published in Cirugía Plástica Ibero-Latinoamericana - Multiple papers',
+                        'National Resident Competition Presenter - Colombia (2019)',
+                        'Specialized in innovative cleft palate repair techniques',
+                        'Published COVID-19 guidelines for elective plastic surgery',
+                        'International speaker at Mexican and Colombian conferences',
+                        'Chief Resident during final year of training (2021-2022)',
+                        'Second highest academic achievement in medical school class'
+                    ]
+                }
+            };
+            
+            function openModal() {
+                const modal = document.getElementById('consultModal');
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeModal() {
+                const modal = document.getElementById('consultModal');
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+            
+            function openSurgeonProfile(surgeonId) {
+                const surgeon = surgeonProfiles[surgeonId];
+                if (!surgeon) return;
+                
+                document.getElementById('surgeon-modal-title').textContent = surgeon.name;
+                
+                const modalBody = document.getElementById('surgeon-modal-body');
+                modalBody.innerHTML = `
+                    <div class="surgeon-profile-header">
+                        <div class="surgeon-profile-image">
+                            <img src="images/surgeons/${surgeonId === 'pablo' ? 'dr-pablo-davalos' : surgeonId === 'pablo-a' ? 'dr-pablo-a-davalos' : 'dr-andres-davalos'}.jpg" 
+                                 alt="${surgeon.name}" 
+                                 width="150" 
+                                 height="150">
+                        </div>
+                        <div class="surgeon-profile-info">
+                            <h2>${surgeon.name}</h2>
+                            <div class="title">${surgeon.title}</div>
+                            <div class="credentials-list">
+                                ${surgeon.credentials.map(cred => `<span class="credential">${cred}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-stats">
+                        ${surgeon.stats.map(stat => `
+                            <div class="stat-item">
+                                <div class="stat-number">${stat.number}</div>
+                                <div class="stat-label">${stat.label}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h3>Education & Training</h3>
+                        <ul>
+                            ${surgeon.education.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h3>Areas of Specialization</h3>
+                        <ul>
+                            ${surgeon.specializations.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h3>Hospital Affiliations</h3>
+                        <ul>
+                            ${surgeon.hospital.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h3>Professional Achievements</h3>
+                        <ul>
+                            ${surgeon.achievements.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div style="text-align: center; padding-top: 20px;">
+                        <button class="btn btn-primary btn-schedule-with-surgeon">Schedule Consultation with ${surgeon.name.split(' ').slice(-1)[0]}</button>
+                    </div>
+                `;
+                
+                const surgeonModal = document.getElementById('surgeonModal');
+                surgeonModal.classList.add('active');
+                surgeonModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                
+                const scheduleBtn = modalBody.querySelector('.btn-schedule-with-surgeon');
+                if (scheduleBtn) {
+                    scheduleBtn.addEventListener('click', function() {
+                        closeSurgeonModal();
+                        openModal();
+                    });
+                }
+            }
+            
+            function closeSurgeonModal() {
+                const modal = document.getElementById('surgeonModal');
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+            
+            function handleFormSubmit(event) {
+                event.preventDefault();
+                const btn = event.target.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="loading"></span> Submitting...';
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Thank you for your interest! We will contact you within 24 hours to schedule your consultation.');
+                    closeModal();
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    event.target.reset();
+                }, 2000);
+            }
+            
+            function toggleFAQ(button) {
+                const faqItem = button.parentElement;
+                const wasActive = faqItem.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                if (!wasActive) {
+                    faqItem.classList.add('active');
+                }
+            }
+            
+            function filterGallery(category) {
+                const items = document.querySelectorAll('.gallery-item');
+                items.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+            
+            function toggleMobileMenu() {
+                const navMenu = document.querySelector('.nav-menu');
+                navMenu.classList.toggle('active');
+            }
+            
+            function setupSmoothScroll() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        if (targetId === '#') return;
+                        
+                        const target = document.querySelector(targetId);
+                        if (target) {
+                            const offset = 100;
+                            const targetPosition = target.offsetTop - offset;
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                            
+                            if (window.innerWidth <= 768) {
+                                const navMenu = document.querySelector('.nav-menu');
+                                navMenu.classList.remove('active');
+                            }
+                        }
+                    });
+                });
+            }
+            
+            function setupScrollEffects() {
+                window.addEventListener('scroll', () => {
+                    const currentScroll = window.pageYOffset;
+                    const header = document.querySelector('header');
+                    
+                    if (currentScroll > 100) {
+                        header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                    } else {
+                        header.style.boxShadow = 'var(--shadow-sm)';
+                    }
+                });
+            }
+            
+            function setupScrollAnimations() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -100px 0px'
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeInUp 0.6s ease both';
+                        }
+                    });
+                }, observerOptions);
+                
+                document.querySelectorAll('.package-card, .surgeon-card, .gallery-item, .testimonial-card').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+            
+            function setupEventListeners() {
+                document.querySelectorAll('.btn-open-modal').forEach(btn => {
+                    btn.addEventListener('click', openModal);
+                });
+                
+                document.querySelectorAll('.modal-close, .btn-close-modal').forEach(btn => {
+                    btn.addEventListener('click', closeModal);
+                });
+                
+                document.querySelectorAll('.btn-close-surgeon').forEach(btn => {
+                    btn.addEventListener('click', closeSurgeonModal);
+                });
+                
+                document.getElementById('consultModal').addEventListener('click', function(e) {
+                    if (e.target === this) closeModal();
+                });
+                
+                document.getElementById('surgeonModal').addEventListener('click', function(e) {
+                    if (e.target === this) closeSurgeonModal();
+                });
+                
+                const consultForm = document.getElementById('consultForm');
+                if (consultForm) {
+                    consultForm.addEventListener('submit', handleFormSubmit);
+                }
+                
+                document.querySelectorAll('.faq-question').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        toggleFAQ(this);
+                    });
+                });
+                
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        filterGallery(this.dataset.filter);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-surgeon-profile, [data-surgeon]').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const surgeonId = this.dataset.surgeon;
+                        if (surgeonId) openSurgeonProfile(surgeonId);
+                    });
+                });
+                
+                const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+                }
+            }
+            
+            function init() {
+                setupEventListeners();
+                setupSmoothScroll();
+                setupScrollEffects();
+                setupScrollAnimations();
+            }
+            
+            return {
+                init: init,
+                openModal: openModal,
+                closeModal: closeModal,
+                openSurgeonProfile: openSurgeonProfile,
+                closeSurgeonModal: closeSurgeonModal
+            };
+        })();
+        
+        document.addEventListener('DOMContentLoaded', window.App.init);
+    </script>
+
+    <!-- Mobile JS Overrides START -->
+    <script id="mobile-overrides-js">
+      (function() {
+        // Enhanced mobile navigation dropdown behavior
+        if (window.innerWidth <= 768) {
+          const dropdowns = document.querySelectorAll('.nav-dropdown');
+          
+          dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+            const menu = dropdown.querySelector('.nav-dropdown-menu');
+            
+            if (toggle && menu) {
+              toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                
+                // Close other dropdowns
+                dropdowns.forEach(d => {
+                  const t = d.querySelector('.nav-dropdown-toggle');
+                  const m = d.querySelector('.nav-dropdown-menu');
+                  if (t && m && t !== toggle) {
+                    t.setAttribute('aria-expanded', 'false');
+                    m.style.display = 'none';
+                  }
+                });
+                
+                // Toggle current dropdown
+                toggle.setAttribute('aria-expanded', !isExpanded);
+                menu.style.display = isExpanded ? 'none' : 'block';
+              });
+            }
+          });
+        }
+        
+        // Improved mobile menu body scroll lock
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (mobileMenuBtn && navMenu) {
+          mobileMenuBtn.addEventListener('click', function() {
+            const isActive = navMenu.classList.contains('active');
+            if (!isActive) {
+              document.body.style.position = 'fixed';
+              document.body.style.width = '100%';
+            } else {
+              document.body.style.position = '';
+              document.body.style.width = '';
+            }
+          });
+        }
+        
+        // Close mobile menu on outside click
+        document.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768 && navMenu && navMenu.classList.contains('active')) {
+            if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+              navMenu.classList.remove('active');
+              document.body.style.position = '';
+              document.body.style.width = '';
+            }
+          }
+        });
+        
+        // Improved touch feedback for interactive elements
+        if ('ontouchstart' in window) {
+          document.addEventListener('touchstart', function(e) {
+            if (e.target.classList.contains('btn') || 
+                e.target.classList.contains('filter-btn') || 
+                e.target.classList.contains('faq-question')) {
+              e.target.style.transform = 'scale(0.98)';
+            }
+          });
+          
+          document.addEventListener('touchend', function(e) {
+            if (e.target.classList.contains('btn') || 
+                e.target.classList.contains('filter-btn') || 
+                e.target.classList.contains('faq-question')) {
+              setTimeout(() => {
+                e.target.style.transform = '';
+              }, 100);
+            }
+          });
+        }
+        
+        // Viewport height fix for mobile browsers
+        function setVH() {
+          const vh = window.innerHeight * 0.01;
+          document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        setVH();
+        window.addEventListener('resize', setVH);
+        
+        // Prevent double-tap zoom on buttons
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+          const now = Date.now();
+          if (now - lastTouchEnd <= 300) {
+            e.preventDefault();
+          }
+          lastTouchEnd = now;
+        }, false);
+      })();
+    </script>
+    <!-- Mobile JS Overrides END -->
+
+    <!-- Mobile Horizontal Scroll JS START -->
+    <script id="mobile-horizontal-scroll-js">
+      (function() {
+        // Add navigation arrows to scrollable sections
+        function addScrollArrows(container) {
+          if (!container) return;
+          
+          // Check if we're on mobile
+          if (window.innerWidth > 768) return;
+          
+          // Create wrapper if not exists
+          let wrapper = container.parentElement;
+          if (!wrapper.classList.contains('scroll-wrapper')) {
+            wrapper = document.createElement('div');
+            wrapper.className = 'scroll-wrapper';
+            container.parentNode.insertBefore(wrapper, container);
+            wrapper.appendChild(container);
+          }
+          
+          // Check if arrows already exist
+          if (wrapper.querySelector('.scroll-arrow')) return;
+          
+          // Create arrows
+          const prevArrow = document.createElement('button');
+          prevArrow.className = 'scroll-arrow prev';
+          prevArrow.innerHTML = '‹';
+          prevArrow.setAttribute('aria-label', 'Previous item');
+          
+          const nextArrow = document.createElement('button');
+          nextArrow.className = 'scroll-arrow next';
+          nextArrow.innerHTML = '›';
+          nextArrow.setAttribute('aria-label', 'Next item');
+          
+          wrapper.appendChild(prevArrow);
+          wrapper.appendChild(nextArrow);
+          
+          // Get item width
+          function getItemWidth() {
+            const firstItem = container.firstElementChild;
+            if (firstItem && !firstItem.classList.contains('')) {
+              const styles = getComputedStyle(container);
+              const gap = parseInt(styles.gap || styles.columnGap || 0);
+              return firstItem.offsetWidth + gap;
+            }
+            return container.offsetWidth * 0.85;
+          }
+          
+          // Update arrow states
+          function updateArrows() {
+            const scrollLeft = container.scrollLeft;
+            const scrollWidth = container.scrollWidth;
+            const clientWidth = container.clientWidth;
+            
+            if (scrollLeft <= 10) {
+              prevArrow.classList.add('disabled');
+            } else {
+              prevArrow.classList.remove('disabled');
+            }
+            
+            if (scrollLeft + clientWidth >= scrollWidth - 10) {
+              nextArrow.classList.add('disabled');
+            } else {
+              nextArrow.classList.remove('disabled');
+            }
+          }
+          
+          // Scroll to next/prev
+          prevArrow.addEventListener('click', function() {
+            const itemWidth = getItemWidth();
+            container.scrollBy({
+              left: -itemWidth,
+              behavior: 'smooth'
+            });
+          });
+          
+          nextArrow.addEventListener('click', function() {
+            const itemWidth = getItemWidth();
+            container.scrollBy({
+              left: itemWidth,
+              behavior: 'smooth'
+            });
+          });
+          
+          // Update arrows on scroll
+          container.addEventListener('scroll', updateArrows);
+          
+          // Initial arrow state
+          setTimeout(updateArrows, 100);
+        }
+        
+        // Auto-center the Premium (featured) package on mobile
+        function centerFeaturedPackage() {
+          if (window.innerWidth > 768) return;
+          
+          const packagesGrid = document.querySelector('.packages-grid');
+          if (!packagesGrid) return;
+          
+          const featuredCard = packagesGrid.querySelector('.package-card.featured');
+          if (!featuredCard) return;
+          
+          // Calculate scroll position to center the featured card
+          const cardWidth = featuredCard.offsetWidth;
+          const containerWidth = packagesGrid.clientWidth;
+          const cardIndex = Array.from(packagesGrid.children).indexOf(featuredCard);
+          const gap = parseInt(getComputedStyle(packagesGrid).gap || 20);
+          
+          // Calculate the scroll position (featured card is the second one, index 1)
+          const scrollPosition = (cardWidth + gap) * cardIndex - (containerWidth - cardWidth) / 2;
+          
+          // Scroll to center the featured card
+          setTimeout(() => {
+            packagesGrid.scrollTo({
+              left: scrollPosition,
+              behavior: 'smooth'
+            });
+          }, 200);
+        }
+        
+        // Initialize arrows when DOM is ready
+        function initScrollArrows() {
+          // Only run on mobile
+          if (window.innerWidth > 768) return;
+          
+          const scrollableElements = [
+            '.packages-grid',
+            '.timeline-steps',
+            '.surgeons-grid',
+            '.gallery-grid',
+            '.testimonials-slider'
+          ];
+          
+          scrollableElements.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+              addScrollArrows(element);
+            }
+          });
+          
+          // Center the featured package after arrows are added
+          centerFeaturedPackage();
+        }
+        
+        // Run after a delay to ensure DOM is fully ready
+        setTimeout(initScrollArrows, 100);
+        
+        // Also run on DOM ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function() {
+            initScrollArrows();
+            centerFeaturedPackage();
+          });
+        } else {
+          setTimeout(function() {
+            initScrollArrows();
+            centerFeaturedPackage();
+          }, 500);
+        }
+        
+        // Re-init on window resize
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            // Remove existing arrows first
+            document.querySelectorAll('.scroll-arrow').forEach(arrow => arrow.remove());
+            document.querySelectorAll('.scroll-wrapper').forEach(wrapper => {
+              const child = wrapper.firstElementChild;
+              if (child && child.classList.contains('packages-grid') || 
+                  child.classList.contains('timeline-steps') || 
+                  child.classList.contains('surgeons-grid') || 
+                  child.classList.contains('gallery-grid') || 
+                  child.classList.contains('testimonials-slider')) {
+                wrapper.parentNode.insertBefore(child, wrapper);
+                wrapper.remove();
+              }
+            });
+            // Re-init if on mobile
+            initScrollArrows();
+            centerFeaturedPackage();
+          }, 250);
+        });
+      })();
+    </script>
+    <!-- Mobile Horizontal Scroll JS END -->
+
+    <!--
+    *** Manual QA (10 minutes) ***
+    View at 390px, 430px, 768px, and desktop.
+    1) Header/nav wraps, menu opens/closes, body scroll lock OK
+    2) Primary CTAs not clipped; tap targets ≥44px
+    3) Forms: focus states, validation messages visible, no iOS zoom
+    4) Tables/cards: no horizontal clipping; scroll container works
+    5) No console errors; tracked data-* unchanged
+    -->
+</body>
+</html>
